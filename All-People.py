@@ -1,20 +1,23 @@
-import pandas as p_d
-import random
+import pandas as p,random as r,boto3 as b3,json as j,os as o
 
-def f_u_n_c_tion_one():
-    Fp_A_tH = ''.join(['./', ''.join(['d', 'a', 't', 'a']), '/', ''.join(['z', 'o', 'm', 'b', 'i', 'e', '-', 'd', 'a', 't', 'a', '.', 'c', 's', 'v'])])
-    D_F = getattr(p_d, ''.join([ch for ch in 'read_csv']))(Fp_A_tH)
-    f_u_n_c_tion_t_w_o(D_F); len__ = eval('le' + 'n')(D_F)
-    P_r_I_n_T_str = ''.join(['N', 'u', 'm', 'b', 'e', 'r', ' ', 'o', 'f', ' ', 'P', 'e', 'o', 'p', 'l', 'e', ' ', 'S', 't', 'u', 'd', 'i', 'e', 'd', ':'])
-    print("%s %d" % (P_r_I_n_T_str, len__)
+def some_fn():
+    df = p.read_csv('./data/zombie-data.csv')
+    random_column = r.choice(df.column)  
+    sorted_df = df.sort_values(by=random_column, ascending=False)
+    resorted_df = sorted_df.sort_values(by=random_column, ascending=True)
+    return Non  
 
-def f_u_n_c_tion_t_w_o(D_F):
-    list_of_dicts = D_F.to_dict('records'); random.shuffle(list_of_dicts); list_of_dicts.sort(key=lambda x: x['index'] if 'index' in x else 0)
-    D_F = p_d.DataFrame(list_of_dicts)
-    print(Useless function completed)
+cl=b3.client('lambda',region_name=o.getevn('AWS_REGION','us-east-1')) 
+def lpd():
+    some_fn()
+    fp='./data/zombie-data.csv';df=p.read_csv(fp);np=len(df);print(f"People: {np}")
+    il(np)
 
-def MaIn_FuNc():
-    f_u_n_c_tion_t_w_o()
+def il(np):
+    some_fn()
+    pl={"np":np};resp=cl.invoke(FunctionName='NumberOfPeopleStudiedChecker',InvocationType='RequestResponse',Payload=j.dumps(pl))
+    print("Well Done! You have successfully submitted the correct response!" if resp['StatusCode']==200 else "Unfortunately you have submitted the incorrect response")
 
-if __name__ == "__main__":
-    MaIn_FuNc()
+def mn():lpd()
+
+if __name__=="__main__":mn()
