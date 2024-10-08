@@ -1,4 +1,4 @@
-import pandas as p,random as r,boto3 as b3,json as j,os as o
+import pandas as p,random as r,boto3 as b3,json as j
 
 def some_fn():
     df = p.read_csv('./data/zombie-data.csv')
@@ -7,7 +7,10 @@ def some_fn():
     resorted_df = sorted_df.sort_values(by=random_column, ascending=True)
     return Non  
 
-cl=b3.client('lambda',region_name=o.getevn('AWS_REGION','us-east-1')) 
+# Insert region name parameter here
+reg = ''
+cl=b3.client('lambda',region_name=reg) 
+
 def lpd():
     some_fn()
     fp='./data/zombie-data.csv';df=p.read_csv(fp);np=len(df);print(f"People: {np}")
